@@ -1,0 +1,7 @@
+Django==3.1
+mysqlclient
+sqlalchemy
+pandas
+dj-database-url
+django-heroku
+gunicorn

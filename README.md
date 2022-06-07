@@ -11,25 +11,24 @@
 
 #### 初めてクローンする時(作業するディレクトリ配下で)
 ```python:docker.py
-git clone https://github.com/tsukaryo/SupportersHackathon.git
-```
-
-作業ディレクトリに移動
-```python:docker.py
-cd SupporetrsHackathon
-```
-dockerコンテナビルド
-```python:docker.py
+git clone https://github.com/tsukaryo/Supporters_Hackathon.git
+cd Supporters_Hackathon
 docker-compose build
+docker-compose run web python3 manage.py migrate auth
+docker-compose run web python3 manage.py migrate
 ```
-#### 2回目以降はここから
-
 dockerコンテナ起動
 ```python:docker.py
-docker-compose up -d
+docker-compose up
 ```
 
 ローカルで確認(URL)
 ```python:docker.py
 http://localhost:8000/
+```
+
+#### 2回目以降
+dockerコンテナ起動
+```python:docker.py
+docker-compose start
 ```

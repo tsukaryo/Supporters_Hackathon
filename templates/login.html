@@ -11,13 +11,18 @@
 </head>
 
 <body>
-    <h1>ES支援アプリ</h1>
+<h1>ログイン</h1>
 
-    <a href="{% url 'login' %}"><button type="button" class="btn btn-primary">ログイン</button></a>
-    <p>新規登録</p>
- 
-    
+<p>メールアドレス</p>
+<p>パスワード</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.email }}
+    {{ form.password }}
+    <button type="submit">送信</button>
+</form>
+
+<button>ログイン</button>
 
 </body>
-
 </html>

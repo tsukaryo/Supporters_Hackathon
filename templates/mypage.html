@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    <h1>ES支援アプリ</h1>
-
-    <a href="{% url 'login' %}"><button type="button" class="btn btn-primary">ログイン</button></a>
-    <p>新規登録</p>
- 
-    
-
+    <h1>マイページ</h1>
+<h2>{{ user.name }}さん</h2>
+<h3>あなたの投稿一覧</h3>
+<p>質問</p>
+{% for question in questions %}
+ <a href="{% url 'answer' pk=user.id ans=question.id %}">{{question.question}}</a>
+{% endfor %}
 </body>
 
 </html>

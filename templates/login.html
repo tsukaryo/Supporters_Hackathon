@@ -13,6 +13,15 @@
 <div class="container">
     <br><br>
 <h1 class="title">ログイン</h1>
+{% if error %}
+
+<div class="block">
+    <div class="notification is-danger">
+        <p>{{ error }}</p>
+    </div>
+</div>
+
+{% endif %}
 
 
 <form method="POST" class="box">
@@ -29,9 +38,7 @@
             {{ form.password }}
         </div>
       </div>
-    
-    
-   
+
     <button type="submit" class="button is-primary">ログイン</button>
 </form>
 

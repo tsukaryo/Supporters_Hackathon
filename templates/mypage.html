@@ -17,15 +17,19 @@
 </div>
 
 <div class="block">
+    <a href="{% url 'logout' %}" class="tag is-danger">ログアウト</a>
+</div>
+
+<div class="block">
 <h2 class="subtitle">{{ user.name }}さん</h2>
 </div>
 
 <div class="block">
-<h3 class="subtitle">あなたの投稿一覧</h3>
+<h3 class="subtitle">あなたの回答</h3>
 </div>
 
 <div class="block">
-<h2 class="subtitle"><strong>質問</strong></h2>
+<h2 class="subtitle"><strong>質問一覧</strong></h2>
 </div>
 
 <div class="block">
@@ -36,6 +40,7 @@
 {% endfor %}
 </div>
 
+<<<<<<< HEAD
 
 
 <div class="container">
@@ -71,6 +76,15 @@
 </div>
 <div class="block">
 <input class="input is-primary" type="number" id = ConstNumber min="10" max="500">
+=======
+<div class="block">
+    <button class="button is-primary">
+        <a href="{% url 'post_answer' pk=user.id %}">追加</a>
+    </button> 
+    </div>
+
+<br><br>
+>>>>>>> 829928e762edd9305c8846a8bd556f0d5e17578e
 </div>
 
 

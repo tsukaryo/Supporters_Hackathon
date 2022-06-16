@@ -11,12 +11,15 @@ def login(request):
     params = {'form': None}
     if request.method == 'POST':
         print(request.POST['password'],request.POST['email'])
-        user = User.objects.get(email=request.POST['email'],password=request.POST['password'])
-        print(user.id)
+        user = User.objects.filter(email=request.POST['email'],password=request.POST['password'])
+        
         if user:
-            url = "mypage/"+str(user.id)
+            user_id = user[0].id
+            url = "mypage/"+str(user_id)
             return redirect(to=url)
         else:
+            params["error"] = "入力内容に誤りがあります。"
+            params['form'] = UserForm()
             return render(request, 'login.html', params)
 
     else:
@@ -34,10 +37,14 @@ def signup(request):
         params['form'] = UserForm()
     return render(request, 'signup.html',params)
 
+def logout(request):
+    return redirect('index')
+
 
 def mypage(request,pk):
-    params ={"user" : None, "questions" : None}
+    params ={"user" : None, "questions" : None} 
     user = User.objects.get(id=pk)
+    print(user)
     questions =Question.objects.filter(userid=pk)
     params["user"] = user 
     params["questions"] = questions
@@ -45,9 +52,53 @@ def mypage(request,pk):
 
 
 def answer(request,pk,ans):
-    return render(request, 'answer.html')
+    params = {}
+    params["pk"] = pk
+    params["ans"] = ans
+    question = Question.objects.filter(userid=pk,id=ans)
+    print(question[0].answer)
+    answer = question[0].answer
+    question = question[0].question
+    params["question"] = question
+    params["answer"] = answer
+    params["answer_length"] = len(answer)
+    if request.method == 'POST':
+        print("要約前：")
+        print(request.POST["length"])
+        max_letter = int(request.POST["length"])
+        summarized_doc = best_summarize_doc(answer, max_letter)
+        print("要約後：")
+        print(summarized_doc)
+        params["summarized_answer"] = summarized_doc
+        params["summarized_answer_length"] = len(summarized_doc)
+        print("文字数:", len(summarized_doc), "文字")
+        return render(request, 'answer.html',params)
+    return render(request, 'answer.html', params)
 
 # questions = {
 #     {"question":"ななな","answer","aaaa"},
 #     {"question":"ななな","answer","aaaa"}
 # }
+
+def post_answer(request,pk):
+    params = {}
+    params['pk'] = pk
+    if request.method == 'POST':
+        question = Question.objects.create(userid=pk, question=request.POST["question"],answer =request.POST["answer"])
+        user = User.objects.get(id=pk)
+        questions =Question.objects.filter(userid=pk)
+        params["user"] = user 
+        params["questions"] = questions
+        return render(request, 'mypage.html',params)
+    return render(request,'post_answer.html',params)
+
+def delete_answer(request,pk,ans):
+    answer = Question.objects.get(userid=pk, id=ans)
+    answer.delete()
+    params ={"user" : None, "questions" : None} 
+    user = User.objects.get(id=pk)
+    questions =Question.objects.filter(userid=pk)
+    params["user"] = user 
+    params["questions"] = questions
+    return render(request, 'mypage.html',params)
+    

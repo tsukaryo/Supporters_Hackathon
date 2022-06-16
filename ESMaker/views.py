@@ -37,10 +37,14 @@ def signup(request):
         params['form'] = UserForm()
     return render(request, 'signup.html',params)
 
+def logout(request):
+    return redirect('index')
+
 
 def mypage(request,pk):
-    params ={"user" : None, "questions" : None}
+    params ={"user" : None, "questions" : None} 
     user = User.objects.get(id=pk)
+    print(user)
     questions =Question.objects.filter(userid=pk)
     params["user"] = user 
     params["questions"] = questions
@@ -49,9 +53,13 @@ def mypage(request,pk):
 
 def answer(request,pk,ans):
     params = {}
+    params["pk"] = pk
+    params["ans"] = ans
     question = Question.objects.filter(userid=pk,id=ans)
     print(question[0].answer)
     answer = question[0].answer
+    question = question[0].question
+    params["question"] = question
     params["answer"] = answer
     params["answer_length"] = len(answer)
     if request.method == 'POST':
@@ -71,3 +79,26 @@ def answer(request,pk,ans):
 #     {"question":"ななな","answer","aaaa"},
 #     {"question":"ななな","answer","aaaa"}
 # }
+
+def post_answer(request,pk):
+    params = {}
+    params['pk'] = pk
+    if request.method == 'POST':
+        question = Question.objects.create(userid=pk, question=request.POST["question"],answer =request.POST["answer"])
+        user = User.objects.get(id=pk)
+        questions =Question.objects.filter(userid=pk)
+        params["user"] = user 
+        params["questions"] = questions
+        return render(request, 'mypage.html',params)
+    return render(request,'post_answer.html',params)
+
+def delete_answer(request,pk,ans):
+    answer = Question.objects.get(userid=pk, id=ans)
+    answer.delete()
+    params ={"user" : None, "questions" : None} 
+    user = User.objects.get(id=pk)
+    questions =Question.objects.filter(userid=pk)
+    params["user"] = user 
+    params["questions"] = questions
+    return render(request, 'mypage.html',params)
+    

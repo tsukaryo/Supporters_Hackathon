@@ -9,19 +9,39 @@
 </head>
 
 <body>
-<h1>サインアップ</h1>
+<div class="container">
+<br><br>
 
-<p>メールアドレス</p>
-<p>パスワード</p>
-<form method="POST">
+<div class="block">
+    <h1 class="title">サインアップ</h1>
+</div>
+<form method="POST" class="box">
     {% csrf_token %}
-    {{ form.name }}
-    {{ form.email }}
-    {{ form.password }}
-    <button type="submit" class="button is-primary">送信</button>
+    <div class="field">
+        <label class="label">名前</label>
+        <div class="control">
+           {{ form.name }}
+        </div>
+      </div>
+    <div class="field">
+        <label class="label">メールアドレス</label>
+        <div class="control">
+           {{ form.email }}
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">パスワード</label>
+        <div class="control">
+            {{ form.password }}
+        </div>
+      </div>
+
+    <button type="submit" class="button is-primary">新規登録</button>
 </form>
 
-<button>新規登録</button>
 
+
+
+</div>
 </body>
 </html>

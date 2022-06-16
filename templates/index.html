@@ -4,20 +4,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
     <title>ESMaker</title>
 
 </head>
 
 <body>
-    <h1>ES支援アプリ</h1>
-
-    <a href="{% url 'login' %}"><button type="button" class="btn btn-primary">ログイン</button></a>
-    <p>新規登録</p>
- 
+<div class="container">
+    <br><br>
+ <div class="block">
+<h1 class="title">ES支援アプリ</h1>
+</div>
+<div class="block">
+    <h2 class="subtitle">〜〜あなたのES作成をサポートします〜〜</h1>
+    </div>
+    
+<div class="block">
+    <a href="{% url 'login' %}"><button class="button is-primary">ログイン</button></a>
+    <a href="{% url 'signup' %}"><button class="button is-primary">新規登録</button></a>
+</div>
     
 
+</div>
 </body>
 
 </html>

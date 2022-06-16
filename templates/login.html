@@ -4,25 +4,38 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <title>ESMaker</title>
 
 </head>
 
 <body>
-<h1>ログイン</h1>
+<div class="container">
+    <br><br>
+<h1 class="title">ログイン</h1>
 
-<p>メールアドレス</p>
-<p>パスワード</p>
-<form method="POST">
+
+<form method="POST" class="box">
     {% csrf_token %}
-    {{ form.email }}
-    {{ form.password }}
-    <button type="submit">送信</button>
+    <div class="field">
+        <label class="label">メールアドレス</label>
+        <div class="control">
+           {{ form.email }}
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">パスワード</label>
+        <div class="control">
+            {{ form.password }}
+        </div>
+      </div>
+    
+    
+   
+    <button type="submit" class="button is-primary">ログイン</button>
 </form>
 
-<button>ログイン</button>
 
+</div>
 </body>
 </html>

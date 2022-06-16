@@ -26,12 +26,12 @@
 
 <div class="block">
     <div class="box">
-    <p>あなたの回答内容(answer)を記載</p>
+    <p>{{ answer }}</p>
     </div> 
 </div>
 
 <div class="block">
-    <h3 class="subtitle">500文字</h3>
+    <h3 class="subtitle">{{ answer_length }}文字</h3>
 </div>
 
 <div class="block">
@@ -39,10 +39,29 @@
 </div>
 
 <div class="block">
-    <input class="input is-primary" type="text" placeholder="100"> 
+<form action="" method="post">
+    {% csrf_token %}
+<div class="block">
+    <input class="input is-primary" type="text" placeholder="100" name="length"> 
+</div>
+<div class="block">
+    <button type="submit" class="button">要約</button>
+</div>
+</form>
 </div>
 
-    
+{% if summarized_answer %}
+<div class="block">
+    <div class="box">
+    <p>{{ summarized_answer }}</p>
+    </div> 
+</div>
+
+<div class="block">
+    <h3 class="subtitle">{{ summarized_answer_length }}文字</h3>
+</div>
+
+{% endif %}
 
 </div>
 </body>

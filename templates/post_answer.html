@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>ESMaker</title>
+
+</head>
+
+<body>
+<div class="container">
+    <br><br>
+<h1 class="title">質問追加</h1>
+
+<div class="block">
+    <h2 class="subtitle">質問</h2>
+</div>
+
+<form action="" method="post">
+    {% csrf_token %}
+<div class="block">
+    <textarea class="textarea" placeholder="" rows="1" name="question"></textarea>
+
+</div>
+
+
+<div class="block">
+    <h2 class="subtitle">回答</h2>
+</div>
+<div class="block">
+    <textarea class="textarea" placeholder="" name="answer"></textarea>
+</div>
+
+<div class="block">
+    <button type="submit" class="button is-success">追加</button>
+</div>
+
+<div class="block">
+    <a href="{% url 'mypage' pk=pk %}" class="tag">戻る</a>
+</div>
+
+</form>
+
+</div>
+</body>
+
+</html>

@@ -13,12 +13,23 @@ def index_view(request):
     text_file_path = os.path.join(module_dir, 'util/sample_text.txt')
     print("PATH IS ",os.path.dirname(__file__))
     f = open(text_file_path, 'r')
-    sample_text = f.readlines()
-    # print(sample_text)
+    sample_text = f.read()
     f.close()
     params = {'text': None}
     params["text"] = sample_text
-    print(sample_text)
+
+    if request.method == 'POST':
+        print("要約前：")
+        print(request.POST["length"])
+        max_letter = int(request.POST["length"])
+        summarized_doc = best_summarize_doc(sample_text, max_letter)
+        print("要約後：")
+        print(summarized_doc)
+        params["summarized_answer"] = summarized_doc
+        params["summarized_answer_length"] = len(summarized_doc)
+        print("文字数:", len(summarized_doc), "文字")
+        return render(request, 'index.html',params)
+
     return render(request, 'index.html', params)
 
 
@@ -180,7 +191,6 @@ def CompanyEsPage(request,pk,comp):
     params["questions"] = questions_answers
     print("params[questions]")
     print(params["questions"])
-    print(params["questions"][0])
 
     user = User.objects.get(id=pk)
     params["user"] = user

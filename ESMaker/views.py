@@ -6,9 +6,18 @@ from .util.summarize import summarize,best_summarize_doc
 #wordcloud用の関数をインポート
 from .util.wordcloud import get_word_str,word_cloud
 from django.contrib import messages
+import os
 
 def index_view(request):
+    module_dir = os.path.dirname(__file__)  
+    text_file_path = os.path.join(module_dir, 'sample_text.txt')
+    print("PATH IS ",os.path.dirname(__file__))
+    f = open(text_file_path, 'r')
+    sample_text = f.readlines()
+    f.close()
     return render(request, 'index.html')
+
+
 
 def login(request):
     params = {'form': None}
@@ -256,27 +265,38 @@ def questions(request,pk):
         params["questions"] = questions
         return render(request,"questions.html",params)
     return render(request,"questions.html",params)
-    
+
 def companies(request,pk):
     params ={"user" : None, "companies" : None} 
     user = User.objects.get(id=pk)
     companies = Company.objects.filter(userid=pk)
     params["user"] = user 
     params["companies"] = companies
+    if request.method == 'POST':
+        SearchCompany = request.POST["SearchBox"]
+        print(SearchCompany)
+        companies = Company.objects.filter(company_name__contains=SearchCompany).filter(userid=pk)
+        params["companies"] = companies
+        return render(request,"companies.html",params)
     return render(request,"companies.html",params)
 
 def wordcloud_test(request,pk,ans):
     params = {}
-    params["pk"] = pk
+    user = User.objects.get(id=pk)
+    params["user"] = user
     params["ans"] = ans
-    question = Question.objects.filter(userid=pk,id=ans)
-    print(question[0].answer)
+    re_question = Question.objects.filter(userid=pk,id=ans)
+    question = re_question[0].question
+    params["question"] = question
+
     answer = question[0].answer
     question = question[0].question
+    params["user"] = user
     params["question"] = question
     params["answer"] = answer
     params["answer_length"] = len(answer)
-    params["word_cloud"] = word_cloud(answer,"テスト")
+    
+    #params["word_cloud"] = word_cloud(answer,"テスト")
     
     return render(request,"wordcloud_test.html",params)
 

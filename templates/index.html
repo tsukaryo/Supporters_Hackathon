@@ -95,6 +95,21 @@
 </div>
 
 
+<form action="" method="post">
+    {% csrf_token %}
+<div class="block">
+    <h2 class="subtitle">要約したい文章</h2>
+</div>
+<div class="block">
+    <textarea class="textarea" placeholder="" name="answer"></textarea>
+</div>
+
+<div class="block">
+    <button type="submit" class="button is-success">要約</button>
+</div>
+
+</form>
+
 
 
 </body>

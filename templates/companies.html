@@ -8,6 +8,14 @@
     <div class="block">
         <h2 class="subtitle"><strong>企業一覧</strong></h2>
     </div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="block">
+            <input name="SearchBox" type="text" placeholder="企業名を入力"></input>
+            <button type="submit"class=submit>検索</button>  
+        </div>
+    </form>
+    <br>
         
     <div class="block">
         {% for company in companies %}

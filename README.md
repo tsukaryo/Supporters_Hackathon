@@ -41,3 +41,9 @@ dockerコンテナ起動
 ```python:docker.py
 docker-compose start
 ```
+
+## heroku デプロイURL
+```python:docker.py
+https://esmaker-s-computing-lab.herokuapp.com/
+```
+

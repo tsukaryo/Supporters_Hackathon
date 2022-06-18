@@ -30,8 +30,8 @@ def get_word_str(text):
 
 # 文字列取得
 def word_cloud(document,filename):
-    picture_name = filename +".pdf"
+    picture_name = filename +".png"
     word_str = get_word_str(document)
-    wc = WordCloud(font_path=FONT_PATH,max_font_size=80).generate(word_str)
-    wc.to_file(picture_name)
-    return os.path.abspath(picture_name)
+    wc = WordCloud(font_path=FONT_PATH,max_font_size=50).generate(word_str)
+    wc.to_file(f"static/{picture_name}")
+    return picture_name

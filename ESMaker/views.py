@@ -306,7 +306,7 @@ def wordcloud_test(request,pk,ans):
     params["answer_length"] = len(answer)
     print(answer)
     
-    params["word_cloud"] = word_cloud(answer,"テスト")
+    params["word_cloud"] = word_cloud(answer,"picture")
     
     return render(request,"wordcloud_test.html",params)
 

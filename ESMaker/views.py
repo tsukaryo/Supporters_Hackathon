@@ -244,25 +244,20 @@ def post_company(request, pk):
 
 
 def questions(request,pk):
-    params ={"user" : None, "questions" : None,"SearchKeyword":None} 
-    params ={"user" : None}
+    params ={"user" : None, "questions" : None} 
     user = User.objects.get(id=pk)
-    {% if SearchKeyword == None %}
-    questions = Question.objects.filter(userid=pk)
-    {% else %}
-    questions = Question.objects.filter(field__contains='SerchKeyword').filter(userid=pk)
-    {% endif %} 
-
     params["user"] = user
+    questions = Question.objects.filter(userid=pk)
     params["questions"] = questions
+
     if request.method == 'POST':
         SearchKeyword = request.POST["SearchBox"]
         print("入力キーワード")
-        params["SearchKeyword"] = SearchKeyword
-        print(params["SearchKeyword"])
+        print(SearchKeyword)
+        questions = Question.objects.filter(question__contains=SearchKeyword).filter(userid=pk)
+        params["questions"] = questions
         return render(request,"questions.html",params)
     return render(request,"questions.html",params)
-
 def companies(request,pk):
     params ={"user" : None, "companies" : None} 
     user = User.objects.get(id=pk)

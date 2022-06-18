@@ -243,8 +243,9 @@ def post_company(request, pk):
 
 
 
-def questions(request,pk,ques,keyword):
+def questions(request,pk):
     params ={"user" : None, "questions" : None,"SearchKeyword":None} 
+    params ={"user" : None}
     user = User.objects.get(id=pk)
     questions = Question.objects.filter(userid=pk)
     params["user"] = user
@@ -254,9 +255,7 @@ def questions(request,pk,ques,keyword):
         print("入力キーワード")
         params["SearchKeyword"] = SearchKeyword
         print(params["SearchKeyword"])
-        return render(request,"question.html",params)
-
-        
+        return render(request,"questions.html",params)
     return render(request,"questions.html",params)
 
 def companies(request,pk):

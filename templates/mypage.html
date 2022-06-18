@@ -1,106 +1,72 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% block content %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>ESMaker</title>
-
-</head>
-
-<body>
 <div class="container">
-    <br><br>
-<div class="block">
-    <h1 class="title">マイページ</h1>
-</div>
 
-<div class="block">
-    <a href="{% url 'logout' %}" class="tag is-danger">ログアウト</a>
-</div>
-
-<div class="block">
-<h2 class="subtitle">{{ user.name }}さん</h2>
-</div>
-
-<div class="columns">
+<br><br>
+{% load static %}
+<div class="columns is-centered ">
     <!-- 1列目 -->
-    <div class="column is-5"  style="background: #fee;">
-        <div class="block">
-            <h3 class="subtitle"><strong>ESで使用する文章を要約したい..!</strong></h3>
-            <a href = "{% url 'questions' pk=user.id %}">こちら</a>
+    <div class="column is-two-fifths"  style="background: rgb(249, 252, 252);">
+        <div class="card">
+            <div class="card-content">
+                 <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <img src="{% static 'AI.jpeg' %}" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">AI要約機能</p>
+                    </div>
+                </div>
+  
+                <div class="content">
+                    <p><strong>機械学習を使って、過去にエントリーシートに使用した文章を好きな文字数に要約します</strong></p>
+                    <br>
+                    <p>自動要約機能を使いたい方..!</p>
+                    <div class="block is-size5">
+                        <a href="{% url 'questions' pk=user.id %}" class="tag is-primary is-size-5">こちら</a>
+                    </div>
+                    
+                </div>
             </div>
-    
-    </div>
-    <!-- 2列目 -->
-    <div class="column is-5" style="background: #ffe;">
-        <div class="block">
-            <h3 class="subtitle"><strong>出したESに使用した内容を一括管理したい..!</strong></h3>
-            <a href = "{% url 'companies' pk=user.id %}">こちら</a>
-            </div>
-    </div>
-</div>
-
-
-<br><br>
-
-
-
-
-<div class="block">
-<h3 class="subtitle">あなたの回答</h3>
-</div>
-
-<div class="block">
-<h2 class="subtitle"><strong>質問一覧</strong></h2>
-</div>
-
-<div class="block">
-{% for question in questions %}
-<div class="box">
-    <a href="{% url 'answer' pk=user.id ans=question.id %}">{{question.question}}</a>
-  </div>
-{% endfor %}
-</div>
-
-<div class="block">
-    <button class="button is-primary">
-        <a href="{% url 'post_answer' pk=user.id %}">追加</a>
-    </button> 
-    </div>
-
-
-<br><br>
-
-
-<div class="block">
-    <h2 class="subtitle"><strong>企業一覧</strong></h2>
-    </div>
-    
-    <div class="block">
-    {% for company in companies %}
-
-    <div class="box">
-        <!--p>{{company.company_name}}</p>-->
-        <a href="{% url 'CompanyEsPage' pk=user.id comp=company.id %}">{{company.company_name}}</a>
-    </div>
-    {% endfor %}
- 
-
-    <div class="block">
-        <button class="button is-primary">
-            <a href="{% url 'post_company' pk=user.id %}">追加</a>
-        </button> 
         </div>
     </div>
+    <div class="column is-two-fifths" style="background: rgb(249, 252, 252);">
+        <div class="card">
+            <div class="card-content">
+                 <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <img src="{% static 'kanri.jpeg' %}" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">応募先管理機能</p>
+                    </div>
+                </div>
+  
+                <div class="content">
+                    <p><strong>応募した企業のエントリー内容を管理します</strong></p>
+                    <br><br>
+                    <p>応募内容を管理したい方..!</p>
+                    <a href="{% url 'companies' pk=user.id %}" class="tag is-primary is-size-5">こちら</a>
+                </div>
+            </div>
+        </div>
 
+    </div>
+  </div>
+
+
+
+
+
+
+<br><br>
 
 </div>
-<br>
-
     
 
-</body>
-
-</html>
+{% endblock %}

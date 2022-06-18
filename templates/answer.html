@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% block content %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>ESMaker</title>
 
-</head>
-
-<body>
 <div class="container">
     <br><br>
 <div class="block">
@@ -32,8 +24,14 @@
     </div> 
 </div>
 
+
 <div class="block">
     <h3 class="subtitle">{{ answer_length }}文字</h3>
+</div>
+
+<div class="block">
+    <a href="{% url 'Edit_answer' pk=pk ans=ans %}" class="tag">編集</a>
+    <a href="{% url 'delete_answer' pk=pk ans=ans%}" class="tag">削除</a>
 </div>
 
 <div class="block">
@@ -69,12 +67,9 @@
     <a href="{% url 'mypage' pk=pk %}" class="tag">戻る</a>
 </div>
 
-<div class="block">
-    <a href="{% url 'delete_answer' pk=pk ans=ans%}" class="tag">削除</a>
-</div>
+
 
 </div>
 <br><br>
-</body>
 
-</html>
+{% endblock %}

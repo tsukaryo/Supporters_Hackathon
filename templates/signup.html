@@ -9,13 +9,27 @@
 </head>
 
 <body>
+
+  <div class="hero is-primary">
+    <div class="hero-body ">
+        <div class="container">
+            <nav class = "level is-size-3">
+            
+                <div class = "level-left">
+                    <h1 class="level-item has-text-weight-bold"><a href="{% url 'index' %}">ES Maker</a></h1>
+                </div>
+            </nav>
+        </div>
+    </div>
+  </div>
+
 <div class="container">
 <br><br>
 
-<div class="block">
+<div class="has-text-centered">
     <h1 class="title">サインアップ</h1>
 </div>
-<form method="POST" class="box">
+<form method="POST" class="box has-text-centered">
     {% csrf_token %}
     <div class="field">
         <label class="label">名前</label>
@@ -35,7 +49,8 @@
             {{ form.password }}
         </div>
       </div>
-
+    
+    <br></br>
     <button type="submit" class="button is-primary">新規登録</button>
 </form>
 

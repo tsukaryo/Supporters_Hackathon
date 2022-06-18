@@ -1,40 +1,36 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% block content %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>ESMaker</title>
 
-</head>
-
-<body>
 <div class="container">
-    <br><br>
-
-<div class="block">
-    <h2 class="subtitle"><strong>企業一覧</strong></h2>
-</div>
-    
-<div class="block">
-    {% for company in companies %}
-
-    <div class="box">
-        <!--p>{{company.company_name}}</p>-->
-        <a href="{% url 'CompanyEsPage' pk=user.id comp=company.id %}">{{company.company_name}}</a>
-    </div>
-    {% endfor %}
- 
+    <br></br>
 
     <div class="block">
-        <button class="button is-primary">
-            <a href="{% url 'post_company' pk=user.id %}">追加</a>
-        </button> 
+        <h2 class="subtitle"><strong>企業一覧</strong></h2>
     </div>
-</div>
+        
+    <div class="block">
+        {% for company in companies %}
+
+    
+            <!--p>{{company.company_name}}</p>-->
+            <a href="{% url 'CompanyEsPage' pk=user.id comp=company.id %}" class="box is-white">{{company.company_name}}</a>
+
+        {% endfor %}
+    
+
+        <div class="block">
+                <a href="{% url 'post_company' pk=user.id %}" class="button is-primary">追加</a>
+        </div>
+
+
+
+    </div>
+
+    <div class="block is-size5">
+        <a href="{% url 'mypage' pk=user.id %}" class="tag">マイページへ戻る</a>
+    </div>
 
 </div>
 
-</body>
-</html>
+{% endblock %}

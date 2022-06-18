@@ -17,6 +17,8 @@ urlpatterns = [
     path('CompanyEsPage/<int:pk>/<int:comp>', views.CompanyEsPage, name='CompanyEsPage'),
     path('CompanyEsPost/<int:pk>/<int:comp>', views.CompanyESPost, name='CompanyESPost'),
     path('answer/<int:pk>/<int:ans>/delete', views.delete_answer, name='delete_answer'),
+    path('Edit_answer/<int:pk>/<int:ans>',views.Edit_answer, name='Edit_answer'),
+    path('Edit_ES/<int:pk>/<int:comp>/<int:es>',views.Edit_ES, name='Edit_ES'),
 
     #質問一覧のページ
     path('questions/<int:pk>/', views.questions, name='questions'),
@@ -28,4 +30,9 @@ urlpatterns = [
 
 
     path('wordcloud_test/<int:pk>/<int:ans>', views.wordcloud_test, name='wordcloud_test'),
+
+    #企業削除ページ
+    path('delete_company/<int:pk>/<int:comp>', views.delete_company, name='delete_company'),
+
+
 ]

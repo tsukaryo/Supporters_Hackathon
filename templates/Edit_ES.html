@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+ 
+<div class="container">
+    <br><br>
+    <h1 class="title">回答の編集</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="block">
+            <h2 class="subtitle">回答</h2>
+        </div>
+        <div class="block">
+            <textarea class="textarea" name="question" id="text_area" cols="30" rows="1">{{ question.question }}</textarea>
+        </div>
+        <div class="block">
+            <textarea class="textarea" name="answer" id="text_area" cols="30" rows="10">{{ question.answer }}</textarea>
+        </div>
+    
+    <div class="block">
+        <button type="submit" class="button is-success">更新</button>  
+    </div>
+    </form>
+
+</div>
+{% endblock %}

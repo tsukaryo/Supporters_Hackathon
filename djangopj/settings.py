@@ -22,7 +22,7 @@ SECRET_KEY = 'w)ceal@!1u_dgm35wd%n#@4gz!tmqipa$$j-)949t^d40w1+3n'
 
 
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 

@@ -10,12 +10,16 @@ import os
 
 def index_view(request):
     module_dir = os.path.dirname(__file__)  
-    text_file_path = os.path.join(module_dir, 'sample_text.txt')
+    text_file_path = os.path.join(module_dir, 'util/sample_text.txt')
     print("PATH IS ",os.path.dirname(__file__))
     f = open(text_file_path, 'r')
     sample_text = f.readlines()
+    # print(sample_text)
     f.close()
-    return render(request, 'index.html')
+    params = {'text': None}
+    params["text"] = sample_text
+    print(sample_text)
+    return render(request, 'index.html', params)
 
 
 
@@ -288,15 +292,12 @@ def wordcloud_test(request,pk,ans):
     re_question = Question.objects.filter(userid=pk,id=ans)
     question = re_question[0].question
     params["question"] = question
-
-    answer = question[0].answer
-    question = question[0].question
-    params["user"] = user
-    params["question"] = question
+    answer = re_question[0].answer
     params["answer"] = answer
     params["answer_length"] = len(answer)
+    print(answer)
     
-    #params["word_cloud"] = word_cloud(answer,"テスト")
+    params["word_cloud"] = word_cloud(answer,"テスト")
     
     return render(request,"wordcloud_test.html",params)
 

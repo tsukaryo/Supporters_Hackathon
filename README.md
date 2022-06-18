@@ -9,6 +9,12 @@
 
 <br><br>
 
+### ペルソナ
+#### ・筑波大学院 修士1年 数値計算系研究室所属
+#### ・機械学習エンジニア志望
+
+
+
 #### 初めてクローンする時(作業するディレクトリ配下で)
 ```python:docker.py
 git clone https://github.com/tsukaryo/Supporters_Hackathon.git

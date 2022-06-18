@@ -21,7 +21,7 @@ urlpatterns = [
     path('Edit_ES/<int:pk>/<int:comp>/<int:es>',views.Edit_ES, name='Edit_ES'),
 
     #質問一覧のページ
-    path('questions/<int:pk>/', views.questions, name='questions'),
+    path('questions/<int:pk>/<>', views.questions, name='questions'),
     #ESを出した会社を管理するページ
     path('companies/<int:pk>/', views.companies, name='companies'),
 

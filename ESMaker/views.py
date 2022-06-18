@@ -243,18 +243,18 @@ def post_company(request, pk):
 
 
 
-def questions(request,pk):
+def questions(request,pk,ques,keyword):
     params ={"user" : None, "questions" : None,"SearchKeyword":None} 
     user = User.objects.get(id=pk)
     questions = Question.objects.filter(userid=pk)
-    params["user"] = user 
+    params["user"] = user
     params["questions"] = questions
     if request.method == 'POST':
         SearchKeyword = request.POST["SearchBox"]
-        print(SearchKeyword)
         print("入力キーワード")
         params["SearchKeyword"] = SearchKeyword
-        render(request,"question.html",params)
+        print(params["SearchKeyword"])
+        return render(request,"question.html",params)
 
         
     return render(request,"questions.html",params)

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .question_title {
+        background-color: #00FF00;
+    }
+</style>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>{{company.company_name}}</title>
+
+</head>
+
+<body>
+<div class="container">
+<br><br>
+<h1 class="title">{{company.company_name}}</h1>
+
+<div class="block">
+
+    <div class="block">
+        <h2 class="subtitle">質問内容</h1>
+    </div>
+    <div class="block">
+    {% for question in questions %}
+    <h3  class="question_title">{{question.question}}</h3>
+    <div class="box">
+    <p>{{question.answer}}</p>
+        <div class="block">
+            <a href="{% url 'delete_ES' pk=user.id comp=company.id es=question.id %}" class="tag">削除</a>
+        </div>   
+    </div>
+
+    {% endfor %}
+    </div>
+
+
+    <div class="block">
+    <a href="{% url 'CompanyESPost' pk=user.id comp=company.id %}" class="tag">追加</a>
+    </div>
+    <div class="block">
+        <a href="{% url 'mypage' pk=user.id %}" class="tag">戻る</a>
+    </div>
+</div>
+</body>
+
+</html>

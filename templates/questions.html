@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>ESMaker</title>
+
+</head>
+
+<body>
+    <br><br>
+<div class="container">
+    <br></br>
+    <div class="block">
+        <h1 class="title"><a href = "{% url 'mypage' pk=user.id %}">マイページ</a></h1>
+    </div>
+
+    <div class="block">
+        <h2 class="subtitle"><strong>要約したい質問をクリックして下さい。</strong></h2>
+    </div>
+    
+    <div class="block">
+        {% for question in questions %}
+        <div class="box">
+            <a href="{% url 'answer' pk=user.id ans=question.id %}">{{question.question}}</a>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="block">
+        <button class="button is-primary">
+            <a href="{% url 'post_answer' pk=user.id %}">追加</a>
+        </button> 
+    </div>
+    
+    <br></br>
+
+    <div class="block">
+        <a href="{% url 'mypage' pk=user.id %}" class="tag">戻る</a>
+    </div>
+
+</div>
+
+    
+
+    
+
+</body>
+</html>

@@ -24,6 +24,30 @@
 <h2 class="subtitle">{{ user.name }}さん</h2>
 </div>
 
+<div class="columns">
+    <!-- 1列目 -->
+    <div class="column is-5"  style="background: #fee;">
+        <div class="block">
+            <h3 class="subtitle"><strong>ESで使用する文章を要約したい..!</strong></h3>
+            <a href = "{% url 'questions' pk=user.id %}">こちら</a>
+            </div>
+    
+    </div>
+    <!-- 2列目 -->
+    <div class="column is-5" style="background: #ffe;">
+        <div class="block">
+            <h3 class="subtitle"><strong>出したESに使用した内容を一括管理したい..!</strong></h3>
+            <a href = "{% url 'companies' pk=user.id %}">こちら</a>
+            </div>
+    </div>
+</div>
+
+
+<br><br>
+
+
+
+
 <div class="block">
 <h3 class="subtitle">あなたの回答</h3>
 </div>
@@ -46,8 +70,37 @@
     </button> 
     </div>
 
+
 <br><br>
+
+
+<div class="block">
+    <h2 class="subtitle"><strong>企業一覧</strong></h2>
+    </div>
+    
+    <div class="block">
+    {% for company in companies %}
+
+    <div class="box">
+        <!--p>{{company.company_name}}</p>-->
+        <a href="{% url 'CompanyEsPage' pk=user.id comp=company.id %}">{{company.company_name}}</a>
+    </div>
+    {% endfor %}
+ 
+
+    <div class="block">
+        <button class="button is-primary">
+            <a href="{% url 'post_company' pk=user.id %}">追加</a>
+        </button> 
+        </div>
+    </div>
+
+
 </div>
+<br>
+
+    
+
 </body>
 
 </html>

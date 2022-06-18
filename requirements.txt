@@ -8,3 +8,5 @@ gunicorn
 mecab-python3==0.996.5
 unidic-lite
 pysummarization
+wordcloud
+matplotlib

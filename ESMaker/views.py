@@ -11,7 +11,6 @@ import os
 def index_view(request):
     module_dir = os.path.dirname(__file__)  
     text_file_path = os.path.join(module_dir, 'util/sample_text.txt')
-    print("PATH IS ",os.path.dirname(__file__))
     f = open(text_file_path, 'r')
     sample_text = f.read()
     f.close()
@@ -20,7 +19,7 @@ def index_view(request):
 
     if request.method == 'POST':
         print("要約前：")
-        print(request.POST.get("length"))
+        print(request.POST["length"])
         max_letter = int(request.POST.get("length"))
         summarized_doc = best_summarize_doc(sample_text, max_letter)
         print("要約後：")

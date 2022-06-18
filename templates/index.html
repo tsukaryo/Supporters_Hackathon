@@ -97,7 +97,7 @@
 
 
 <div class="block">
-    <h2 class="subtitle">要約したい文章</h2>
+    <h2 class="subtitle">サンプル文章</h2>
 </div>
 <div class="block">
     <p> {{text}} </p>
@@ -111,7 +111,7 @@
     {% csrf_token %}
 
     <div class="block">
-        <input class="input is-primary" type="number" placeholder="100" name="length"> 
+        <input class="input is-primary" type="text" placeholder="100" name="length"> 
     </div>
 
     <div class="block">
@@ -120,7 +120,21 @@
 
 </form>
 
+{% if summarized_answer %}
+<div class="block">
+    <div class="box">
+    <p>{{ summarized_answer }}</p>
+    </div> 
+</div>
 
+<div class="block">
+    <h3 class="subtitle">{{ summarized_answer_length }}文字</h3>
+</div>
+
+{% endif %}
+
+<br></br>
+<br></br>
 
 </body>
 </html>

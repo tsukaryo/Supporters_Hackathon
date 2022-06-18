@@ -20,8 +20,8 @@ def index_view(request):
 
     if request.method == 'POST':
         print("要約前：")
-        print(request.POST["length"])
-        max_letter = int(request.POST["length"])
+        print(request.POST.get("length"))
+        max_letter = int(request.POST.get("length"))
         summarized_doc = best_summarize_doc(sample_text, max_letter)
         print("要約後：")
         print(summarized_doc)
@@ -262,7 +262,7 @@ def post_company(request, pk):
         params["companies"] = companies
         params["questions"] = questions
         return render(request, 'companies.html',params)
-    return render(request, "Add_Company.html", params)
+    return render(request, "Add_company.html", params)
 
 
 

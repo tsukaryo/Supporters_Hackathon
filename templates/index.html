@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 
+    
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,22 +13,89 @@
 </head>
 
 <body>
-<div class="container">
-    <br><br>
- <div class="block">
-<h1 class="title">ES支援アプリ</h1>
-</div>
-<div class="block">
-    <h2 class="subtitle">〜〜あなたのES作成をサポートします〜〜</h1>
+    <div class="hero is-primary">
+        <div class="hero-body ">
+            <div class="container">
+                <nav class = "level is-size-3">
+                    <div class = "level-left">
+                        <h1 class="level-item has-text-weight-bold">ES Maker</h1>
+                    </div>
+                </nav>
+            </div>
+        </div>
     </div>
-    
-<div class="block">
-    <a href="{% url 'login' %}"><button class="button is-primary">ログイン</button></a>
-    <a href="{% url 'signup' %}"><button class="button is-primary">新規登録</button></a>
-</div>
-    
 
+    <div class="container">
+    <br><br>
+
+<div class="has-text-centered">
+    <h2 class="subtitle">〜〜あなたのES作成をサポートします〜〜</h1>
 </div>
+
+<br></br>
+<div class="has-text-centered">
+    <a href="{% url 'login' %}" class="button is-primary">ログイン</a>
+    <a>&emsp;</a>
+    <a href="{% url 'signup' %}" class="button is-primary">新規登録</a>
+</div>
+
+<br></br>
+
+<div class="columns is-vcentered">
+    <div class="column has-text-centered">
+        <h1 class="title">ES Makerとは？ </h1>
+        <p>
+            就活性のみなさん、多くの企業のエントリーシート(ES)を提出する際に、
+        </p>
+        <br></br>
+        <div class = "media">
+            <div class="media-content">
+                <ul>
+                    <li>
+                        「企業ごとに文字数制限の違いがあって、同じESを使いまわせない!」
+                    </li>
+                    <li>
+                        「応募した企業にどんなESを提出したか忘れた!」
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br></br>
+        という悩みはありませんか?<br>
+
+        ES Makerでは、そんな悩みを解決する2つの機能があります!
+    </div>
+
+    <div class="column">
+        <figure>
+            <img src="{% static 'AI.jpeg' %}" width="300px" height="200px" alt="旅行の準備中">
+            <img src="{% static 'kanri.jpeg' %}" width="300px" height="200px" alt="旅行の準備中">
+        </figure>
+    </div>
+</div>
+
+<div class="block is-size-5">
+    <div class = "content">
+        <ul>
+            <li><strong>AI要約機能</strong></li>
+            <p>
+                AI要約機能とは、登録したガクチカや自分の長所などの質問内容に対して文字数を指定することで、その文字数以下の要約文を作成します。
+                授業やサークルで忙しく、多くの時間を就活に割けない人にオススメ！
+            </p>
+            <br></br>
+            <li><strong>応募先管理機能</strong></li>
+            <p>
+                応募先管理機能とは、企業ごとに提出したESの質問&回答を管理できる機能です。
+                面接前の復習にオススメ!
+            </p>
+        </ul>
+    </div>
+
+    <br><br><br>
+</div>
+
+
+
+
 </body>
-
 </html>

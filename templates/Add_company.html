@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% block content %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>ESMaker</title>
-
-</head>
-
-<body>
 <div class="container">
     <br><br>
 <h1 class="title">企業追加</h1>
@@ -26,7 +17,7 @@
 </div>
 
 <div class="block">
-    <button type="submit" class="button is-success">追加</button>
+    <button type="submit" class="button is-success">企業を追加</button>
 </div>
 
 <div class="block">
@@ -36,6 +27,5 @@
 </form>
 
 </div>
-</body>
 
-</html>
+{% endblock %}

@@ -1,51 +1,115 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% block content %}
+<!--
 <style>
     .question_title {
         background-color: #00FF00;
     }
+    
 </style>
+-->
+<style type="text/css">
+#QandA-1 {
+    width: 100%;
+    font-family: メイリオ;
+    font-size: 16px; /*全体のフォントサイズ*/
+}
+#QandA-1 h2 {
 
+}
+#QandA-1 dt {
+    background: #444; /* 「Q」タイトルの背景色 */
+    color: #fff; /* 「Q」タイトルの文字色 */
+    padding: 8px;
+    border-radius: 2px;
+}
+#QandA-1 dt:before {
+    content: "Q.";
+    font-weight: bold;
+    margin-right: 8px;
+}
+#QandA-1 dd {
+    margin: 24px 16px 40px 32px;
+    line-height: 140%;
+    text-indent: -24px;
+}
+#QandA-1 dd:before {
+    content: "A.";
+    font-weight: bold;
+    margin-right: 8px;
+}
+.bottan {
+}
+    
+</style>
+    
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>{{company.company_name}}</title>
-
-</head>
-
-<body>
 <div class="container">
 <br><br>
 <h1 class="title">{{company.company_name}}</h1>
 
 <div class="block">
-
-    <div class="block">
-        <h2 class="subtitle">質問内容</h1>
+     <div class="block">
+        <h2 class="subtitle"><strong>質問内容</strong></h2>
     </div>
     <div class="block">
-    {% for question in questions %}
-    <h3  class="question_title">{{question.question}}</h3>
-    <div class="box">
-    <p>{{question.answer}}</p>
-        <div class="block">
-            <a href="{% url 'delete_ES' pk=user.id comp=company.id es=question.id %}" class="tag">削除</a>
-        </div>   
+        <div id="QandA-1">
+            {% for question in questions %}
+                <h3  class="question_title">
+                    <dt>{{question.question}}</dt>
+                </h3>
+            <div class="box">
+                
+                <dd>{{question.answer}}</dd>
+                <p>(文字数：{{ question.answer | length }})</p>
+                <br>
+                <div class="tags are-normal">
+                    <span class="tag"> 
+                        <div class="block">
+                            <a href="{% url 'delete_ES' pk=user.id comp=company.id es=question.id %}">削除</a>
+                        </div>   
+                    </span>
+                    <span class="tag">
+                        <div class="block">
+                            <a href="{% url 'Edit_ES' pk=user.id comp=company.id es=question.id %}">編集</a>
+                        </div>
+                    </span>
+                    
+                </div>
+                           
+             </div>
+               
+            {% endfor %}
+        </div>
     </div>
-
-    {% endfor %}
-    </div>
-
 
     <div class="block">
-    <a href="{% url 'CompanyESPost' pk=user.id comp=company.id %}" class="tag">追加</a>
-    </div>
+        <div class="bottan">
+            <a href="{% url 'CompanyESPost' pk=user.id comp=company.id %}" class="button is-primary">追加</a>
+        </div>
+    </div>  
+    
+
     <div class="block">
-        <a href="{% url 'mypage' pk=user.id %}" class="tag">戻る</a>
+        <div class="bottan">
+            <a href="{% url 'delete_company' pk=user.id comp=company.id %}" class="button is-primary">会社情報を削除</a>
+        </div>
+    </div>  
+
+    <br>
+    <h2 class="subtitle"><strong>他の企業</strong></h2>
+        
+    <div class="block">
+        {% for another_company in another_companies %}
+        <div class="box">
+            <a href="{% url 'CompanyEsPage' pk=user.id comp=another_company.id %}">{{another_company.company_name}}</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="bottan">
+        <a href="{% url 'companies' pk=user.id %}" class="button is-primary">戻る</a>
     </div>
 </div>
-</body>
 
-</html>
+{% endblock %}

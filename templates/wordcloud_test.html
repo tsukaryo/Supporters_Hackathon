@@ -13,7 +13,13 @@
 
 <p>aaaaa</p>
 <p>{{user.name}}</p>
-<p>{{word_cloud}}</p>
+<p>"{{word_cloud}}"</p>
+{% load static%}
+<figure class="image is-128x128">
+    <img src="{% static word_cloud %}" alt="Placeholder image">
+</figure>
+
+
 
 
 </body>

@@ -6,9 +6,32 @@ from .util.summarize import summarize,best_summarize_doc
 #wordcloud用の関数をインポート
 from .util.wordcloud import get_word_str,word_cloud
 from django.contrib import messages
+import os
 
 def index_view(request):
-    return render(request, 'index.html')
+    module_dir = os.path.dirname(__file__)  
+    text_file_path = os.path.join(module_dir, 'util/sample_text.txt')
+    f = open(text_file_path, 'r')
+    sample_text = f.read()
+    f.close()
+    params = {'text': None}
+    params["text"] = sample_text
+
+    if request.method == 'POST':
+        print("要約前：")
+        print(request.POST["length"])
+        max_letter = int(request.POST.get("length"))
+        summarized_doc = best_summarize_doc(sample_text, max_letter)
+        print("要約後：")
+        print(summarized_doc)
+        params["summarized_answer"] = summarized_doc
+        params["summarized_answer_length"] = len(summarized_doc)
+        print("文字数:", len(summarized_doc), "文字")
+        return render(request, 'index.html',params)
+
+    return render(request, 'index.html', params)
+
+
 
 def login(request):
     params = {'form': None}
@@ -167,7 +190,6 @@ def CompanyEsPage(request,pk,comp):
     params["questions"] = questions_answers
     print("params[questions]")
     print(params["questions"])
-    print(params["questions"][0])
 
     user = User.objects.get(id=pk)
     params["user"] = user
@@ -200,13 +222,13 @@ def CompanyESPost(request,pk,comp):
     params = {}
     params['pk'] = pk
     params["user_id"] = pk
+    user = User.objects.get(id=pk)
+    params["user"] = user 
     if request.method == 'POST':
         question = ES.objects.create(userid=pk, question=request.POST["question"],answer =request.POST["answer"],company_id=comp)
-        user = User.objects.get(id=pk)
         company = Company.objects.get(id=comp)
         questions = ES.objects.filter(userid=pk,company_id=comp)
-        params["company"] = company
-        params["user"] = user 
+        params["company"] = company 
         params["questions"] = questions
         return render(request, 'CompanyEsPage.html',params)
     return render(request,"ESpost.html",params)
@@ -238,17 +260,23 @@ def post_company(request, pk):
         questions =Question.objects.filter(userid=pk)
         params["companies"] = companies
         params["questions"] = questions
-        return render(request, 'mypage.html',params)
-    return render(request, "Add_Company.html", params)
+        return render(request, 'companies.html',params)
+    return render(request, "Add_company.html", params)
 
 
 
 def questions(request,pk):
     params ={"user" : None, "questions" : None} 
     user = User.objects.get(id=pk)
+    params["user"] = user
     questions = Question.objects.filter(userid=pk)
-    params["user"] = user 
     params["questions"] = questions
+
+    if request.method == 'POST':
+        SearchKeyword = request.POST["SearchBox"]
+        questions = Question.objects.filter(question__contains=SearchKeyword).filter(userid=pk)
+        params["questions"] = questions
+        return render(request,"questions.html",params)
     return render(request,"questions.html",params)
 
 def companies(request,pk):
@@ -257,20 +285,28 @@ def companies(request,pk):
     companies = Company.objects.filter(userid=pk)
     params["user"] = user 
     params["companies"] = companies
+    if request.method == 'POST':
+        SearchCompany = request.POST["SearchBox"]
+        print(SearchCompany)
+        companies = Company.objects.filter(company_name__contains=SearchCompany).filter(userid=pk)
+        params["companies"] = companies
+        return render(request,"companies.html",params)
     return render(request,"companies.html",params)
 
 def wordcloud_test(request,pk,ans):
     params = {}
-    params["pk"] = pk
+    user = User.objects.get(id=pk)
+    params["user"] = user
     params["ans"] = ans
-    question = Question.objects.filter(userid=pk,id=ans)
-    print(question[0].answer)
-    answer = question[0].answer
-    question = question[0].question
+    re_question = Question.objects.filter(userid=pk,id=ans)
+    question = re_question[0].question
     params["question"] = question
+    answer = re_question[0].answer
     params["answer"] = answer
     params["answer_length"] = len(answer)
-    params["word_cloud"] = word_cloud(answer,"テスト")
+    print(answer)
+    
+    params["word_cloud"] = word_cloud(answer,"picture")
     
     return render(request,"wordcloud_test.html",params)
 

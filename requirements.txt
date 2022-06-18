@@ -1,6 +1,7 @@
 Django==3.1
 mysqlclient
 sqlalchemy
+whitenoise
 pandas
 dj-database-url
 django-heroku

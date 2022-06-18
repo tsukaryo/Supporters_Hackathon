@@ -200,13 +200,13 @@ def CompanyESPost(request,pk,comp):
     params = {}
     params['pk'] = pk
     params["user_id"] = pk
+    user = User.objects.get(id=pk)
+    params["user"] = user 
     if request.method == 'POST':
         question = ES.objects.create(userid=pk, question=request.POST["question"],answer =request.POST["answer"],company_id=comp)
-        user = User.objects.get(id=pk)
         company = Company.objects.get(id=comp)
         questions = ES.objects.filter(userid=pk,company_id=comp)
-        params["company"] = company
-        params["user"] = user 
+        params["company"] = company 
         params["questions"] = questions
         return render(request, 'CompanyEsPage.html',params)
     return render(request,"ESpost.html",params)
@@ -244,11 +244,18 @@ def post_company(request, pk):
 
 
 def questions(request,pk):
-    params ={"user" : None, "questions" : None} 
+    params ={"user" : None, "questions" : None,"SearchKeyWord":None} 
     user = User.objects.get(id=pk)
     questions = Question.objects.filter(userid=pk)
     params["user"] = user 
     params["questions"] = questions
+    if request.method == 'GET':
+        SearchKeyword = request.GET["SearchBox"]
+        print(SearchKeyword)
+        print("入力キーワード")
+        params["SearchKeyword"] = SearchKeywor
+        render(request,"question.html",params)
+        
     return render(request,"questions.html",params)
 
 def companies(request,pk):

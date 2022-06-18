@@ -24,10 +24,10 @@
     <div class="block">
         <h2 class="subtitle"><strong>要約したい質問をクリックして下さい。</strong></h2>
     </div>
-    <form action="" method="post">
+    <form action="" method="get">
         {% csrf_token %}
         <div class="block">
-            <input id="SearchBox"name="SearchBox"type="text" placeholder="キーワードを入力">{{}}</input>
+            <input name="SearchBox" type="text" placeholder="キーワードを入力"></input>
             <button type="submit"class=submit>検索</button>  
         </div>
     </form>
@@ -35,7 +35,7 @@
     
     <div class="block">
         {% for question in questions %}
-            <a href="{% url 'answer' pk=user.id ans=question.id %}" class = "box is-white">・{{question.question}}</a>
+            <a href="{% url 'answer' pk=user.id ans=question.id %}" class = "box is-white">{{question.question}}</a>
         {% endfor %}
     </div>
 

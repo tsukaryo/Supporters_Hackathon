@@ -1,2 +1,2 @@
-web: python manage.py runserver 0.0.0.0:$PORT
+web: gunicorn djangopj.wsgi --preload --log-level debug --timeout 60
 

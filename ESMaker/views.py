@@ -238,7 +238,7 @@ def post_company(request, pk):
         questions =Question.objects.filter(userid=pk)
         params["companies"] = companies
         params["questions"] = questions
-        return render(request, 'mypage.html',params)
+        return render(request, 'companies.html',params)
     return render(request, "Add_Company.html", params)
 
 
@@ -247,7 +247,12 @@ def questions(request,pk):
     params ={"user" : None, "questions" : None,"SearchKeyword":None} 
     params ={"user" : None}
     user = User.objects.get(id=pk)
+    {% if SearchKeyword == None %}
     questions = Question.objects.filter(userid=pk)
+    {% else %}
+    questions = Question.objects.filter(field__contains='SerchKeyword').filter(userid=pk)
+    {% endif %} 
+
     params["user"] = user
     params["questions"] = questions
     if request.method == 'POST':

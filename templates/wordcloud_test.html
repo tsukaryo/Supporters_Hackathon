@@ -15,10 +15,12 @@
 <p>{{user.name}}</p>
 <p>"{{word_cloud}}"</p>
 {% load static%}
-<figure class="image is-128x128">
+<figure class="image is-256x256">
     <img src="{% static word_cloud %}" alt="Placeholder image">
 </figure>
-
+<figure>
+    <img src="{% static word_cloud %}" width="500px" height="300px" >
+</figure>
 
 
 

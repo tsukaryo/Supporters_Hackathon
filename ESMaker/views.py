@@ -189,6 +189,7 @@ def Edit_ES(request,pk,es,comp):
     params["company"] = company
     params["user"] = user 
     params["question"] = question
+    params["word_cloud"] = word_cloud(answer,"picture")
     if request.method == 'POST':
         another_company = Company.objects.filter(userid=pk).exclude(id=comp)
         params["another_companies"] = another_company
@@ -213,12 +214,25 @@ def CompanyEsPage(request,pk,comp):
     params["company"] = company[0]
     params["another_companies"] = another_company
     params["answer_length"] = {}
+
     params["questions"] = questions_answers
-    print("params[questions]")
-    print(params["questions"])
 
     user = User.objects.get(id=pk)
     params["user"] = user
+    print("質問回答内容")
+    
+    answer_str = ""
+    for question in questions_answers:
+        answer_str = answer_str + question.answer
+    if answer_str=="":
+        params["word_cloud"] = ""
+        return render(request,'CompanyEsPage.html',params)
+
+    print(answer_str)
+    print(type(answer_str))
+    params["word_cloud"] = word_cloud(answer_str,"picture")
+    
+
 
     # company = [{"id":1}]
     #question_id = Question.objects.get(userid=pk)
@@ -331,10 +345,10 @@ def wordcloud_test(request,pk,ans):
     question = re_question[0].question
     params["question"] = question
     answer = re_question[0].answer
+
     params["answer"] = answer
     params["answer_length"] = len(answer)
-    print(answer)
-    
+
     params["word_cloud"] = word_cloud(answer,"picture")
     
     return render(request,"wordcloud_test.html",params)

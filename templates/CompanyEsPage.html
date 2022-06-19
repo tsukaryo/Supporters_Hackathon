@@ -52,6 +52,7 @@
      <div class="block">
         <h2 class="subtitle"><strong>質問内容</strong></h2>
     </div>
+
     <div class="block">
         <div id="QandA-1">
             {% for question in questions %}
@@ -82,8 +83,16 @@
             {% endfor %}
         </div>
     </div>
+    {% load static %}
+    <div class="has-text-centered">
+        <figure>
+            <img src="{% static word_cloud %}" width="500px" height="300px" >
+        </figure>
+        <p>{{company.company_name}}におけるワードクラウド</p>
+    </div>
+    <br>
 
-    <div class="block">
+    <div class="has-text-centered">
         <div class="bottan">
             <a href="{% url 'CompanyESPost' pk=user.id comp=company.id %}" class="button is-primary">質問と回答を追加</a>
             <a href="{% url 'delete_company' pk=user.id comp=company.id %}" class="button is-primary">会社情報を削除</a>

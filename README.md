@@ -18,6 +18,10 @@
 
 <br>
 
+# プレゼンスライド
+https://docs.google.com/presentation/d/16frh77sTcmW34-_5pFlaRbNFOBeQ8Tfuv43_wfsWKuU/edit#slide=id.p
+
+
 #### 初めてクローンする時(作業するディレクトリ配下で)
 ```python:docker.py
 git clone https://github.com/tsukaryo/Supporters_Hackathon.git
@@ -46,4 +50,5 @@ docker-compose start
 ```python:docker.py
 https://esmaker-s-computing-lab.herokuapp.com/
 ```
+
 

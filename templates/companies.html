@@ -2,43 +2,45 @@
 {% block content %}
 
 
-<div class="container">
-    <br></br>
+    <div class="container">
+        <br>
 
     <div class="block">
-        <h2 class="subtitle"><strong>企業一覧</strong></h2>
-    </div>
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="block">
-            <input name="SearchBox" type="text" placeholder="企業名を入力"></input>
-            <button type="submit"class=submit>検索</button>  
+        <div class="has-text-centered">
+        <h1 class="is-size-3"><strong>企業一覧</strongf></h1>
         </div>
-    </form>
-    <br>
+        <div class="has-text-right">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="field has-addons">
+                    <div class="control">
+                        <input class ="input" name="SearchBox" type="text" placeholder="企業名検索"></input>
+                    </div>
+                    <div class="control">
+                        <button type="submit"class="button is-info"></i>検索</button>  
+                    </div>
+                </div>
+            </form> 
+        </div>
+
         
-    <div class="block">
-        {% for company in companies %}
-
+    </div>
     
-            <!--p>{{company.company_name}}</p>-->
-            <a href="{% url 'CompanyEsPage' pk=user.id comp=company.id %}" class="box is-white">{{company.company_name}}</a>
 
-        {% endfor %}
-    
+        <br>
 
         <div class="block">
-                <a href="{% url 'post_company' pk=user.id %}" class="button is-primary">企業を追加</a>
+            {% for company in companies %}
+                <!--p>{{company.company_name}}</p>-->
+                <a href="{% url 'CompanyEsPage' pk=user.id comp=company.id %}" class="box is-white">{{company.company_name}}</a>
+            {% endfor %}
+        
+            <div class="block">
+                    <a href="{% url 'post_company' pk=user.id %}" class="button is-primary">企業を追加</a>
+                    <a href="{% url 'mypage' pk=user.id %}" class="button is-primary">マイページへ戻る</a>
+            </div>
+            <br>
         </div>
-
-
-
     </div>
-
-    <div class="block is-size5">
-        <a href="{% url 'mypage' pk=user.id %}" class="tag">マイページへ戻る</a>
-    </div>
-
-</div>
 
 {% endblock %}

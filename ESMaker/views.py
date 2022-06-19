@@ -7,15 +7,23 @@ from .util.summarize import summarize,best_summarize_doc
 from .util.wordcloud import get_word_str,word_cloud
 from django.contrib import messages
 import os
+from django.urls import reverse
+from urllib.parse import urlencode
 
 def index_view(request):
     module_dir = os.path.dirname(__file__)  
     text_file_path = os.path.join(module_dir, 'util/sample_text.txt')
     f = open(text_file_path, 'r')
-    sample_text = f.read()
+    sample_text_list = f.readlines()
     f.close()
-    params = {'text': None}
-    params["text"] = sample_text
+    params = {'text': None, "sample_text_length":None}
+    params["text"] = sample_text_list
+
+    sample_text = ""
+    for sample_text_i in sample_text_list:
+        sample_text += sample_text_i
+    
+    params["sample_text_length"] = len(sample_text)
 
     if request.method == 'POST':
         print("要約前：")
@@ -27,7 +35,18 @@ def index_view(request):
         params["summarized_answer"] = summarized_doc
         params["summarized_answer_length"] = len(summarized_doc)
         print("文字数:", len(summarized_doc), "文字")
-        return render(request, 'index.html',params)
+
+        return render(request, 'index.html', params)
+
+        # redirect_url = reverse('index')
+        # print("REDIRECT_URL",redirect_url)
+
+        # parameters = urlencode(params)
+        # print(parameters)
+
+        # url = f'{redirect_url}?{parameters}'
+
+        # return redirect(url)
 
     return render(request, 'index.html', params)
 
@@ -108,6 +127,11 @@ def answer(request,pk,ans):
         params["summarized_answer_length"] = len(summarized_doc)
         print("文字数:", len(summarized_doc), "文字")
         return render(request, 'answer.html',params)
+        # print("USER.ID = ", user.id)
+        # print("ANS = ",ans)
+        # url = str(ans) 
+        # print("URL =", url)
+        # return redirect(to= url)
     return render(request, 'answer.html', params)
 
 # questions = {
@@ -166,6 +190,8 @@ def Edit_ES(request,pk,es,comp):
     params["user"] = user 
     params["question"] = question
     if request.method == 'POST':
+        another_company = Company.objects.filter(userid=pk).exclude(id=comp)
+        params["another_companies"] = another_company
         question.question = request.POST["question"]
         question.answer = request.POST["answer"]
         question.save()
@@ -224,11 +250,13 @@ def CompanyESPost(request,pk,comp):
     params["user_id"] = pk
     user = User.objects.get(id=pk)
     params["user"] = user 
+    company = Company.objects.get(id=comp)
+    params["company"] = company
     if request.method == 'POST':
         question = ES.objects.create(userid=pk, question=request.POST["question"],answer =request.POST["answer"],company_id=comp)
-        company = Company.objects.get(id=comp)
         questions = ES.objects.filter(userid=pk,company_id=comp)
-        params["company"] = company 
+        another_company = Company.objects.filter(userid=pk).exclude(id=comp)
+        params["another_companies"] = another_company
         params["questions"] = questions
         return render(request, 'CompanyEsPage.html',params)
     return render(request,"ESpost.html",params)
@@ -239,14 +267,15 @@ def delete_ES(request,pk,es,comp):
     params ={"user" : None, "questions" : None} 
     user = User.objects.get(id=pk)
     company = Company.objects.get(id=comp)
-    questions = ES.objects.filter(userid=pk)
+    questions = ES.objects.filter(userid=pk,company_id=comp)
     companies = Company.objects.filter(userid=pk)
+    another_company = Company.objects.filter(userid=pk).exclude(id=comp)
+    params["another_companies"] = another_company
     params["user"] = user 
     params["company"] = company
     params["questions"] = questions
     params["companies"] = companies
-    return render(request, 'CompanyESPage.html',params)
-    return render()
+    return render(request, 'CompanyEsPage.html',params)
 
 
 def post_company(request, pk):

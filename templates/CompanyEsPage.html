@@ -86,16 +86,11 @@
     <div class="block">
         <div class="bottan">
             <a href="{% url 'CompanyESPost' pk=user.id comp=company.id %}" class="button is-primary">質問と回答を追加</a>
+            <a href="{% url 'delete_company' pk=user.id comp=company.id %}" class="button is-primary">会社情報を削除</a>
+            <a href="{% url 'companies' pk=user.id %}" class="button is-primary">戻る</a>
         </div>
     </div>  
     
-
-    <div class="block">
-        <div class="bottan">
-            <a href="{% url 'delete_company' pk=user.id comp=company.id %}" class="button is-primary">会社情報を削除</a>
-        </div>
-    </div>  
-
     <br>
     <h2 class="subtitle"><strong>他の企業</strong></h2>
         
@@ -105,10 +100,7 @@
             <a href="{% url 'CompanyEsPage' pk=user.id comp=another_company.id %}">{{another_company.company_name}}</a>
         </div>
         {% endfor %}
-    </div>
-
-    <div class="bottan">
-        <a href="{% url 'companies' pk=user.id %}" class="button is-primary">戻る</a>
+    <br>
     </div>
 </div>
 

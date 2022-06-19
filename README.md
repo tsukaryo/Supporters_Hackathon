@@ -49,8 +49,8 @@ docker-compose start
 ```
 
 ## heroku デプロイURL
-```python:docker.py
+
 https://esmaker-s-computing-lab.herokuapp.com/
-```
+
 
 

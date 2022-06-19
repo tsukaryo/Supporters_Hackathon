@@ -34,7 +34,7 @@ urlpatterns = [
     #企業削除ページ
     path('delete_company/<int:pk>/<int:comp>', views.delete_company, name='delete_company'),
 
-    
+
 
 
 ]

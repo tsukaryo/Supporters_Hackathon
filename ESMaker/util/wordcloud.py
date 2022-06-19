@@ -32,6 +32,7 @@ def get_word_str(text):
 def word_cloud(document,filename):
     picture_name = filename +".png"
     word_str = get_word_str(document)
-    wc = WordCloud(font_path=FONT_PATH,max_font_size=50).generate(word_str)
+    wc = WordCloud(font_path=FONT_PATH,max_font_size=50,background_color="white",colormap="summer").generate(word_str)
+    #wc.to_file(picture_name)
     wc.to_file(f"static/{picture_name}")
     return picture_name

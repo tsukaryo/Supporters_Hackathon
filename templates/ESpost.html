@@ -26,11 +26,8 @@
 
 <div class="block">
     <button type="submit" class="button is-success">追加</button>
-</div>
-
-<div class="block">
-    <a href="{% url 'mypage' pk=pk %}" class="tag">戻る</a>
-</div>
+    <a href="{% url 'CompanyEsPage' pk=pk comp=company.id %}" class="button is-success">戻る</a>
+</div>    </div>
 
 </form>
 

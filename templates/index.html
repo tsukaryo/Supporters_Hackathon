@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
-    <title>ESMaker</title>
+    <title>ESupporter</title>
 
 </head>
 
@@ -18,7 +18,7 @@
             <div class="container">
                 <nav class = "level is-size-3">
                     <div class = "level-left">
-                        <h1 class="level-item has-text-weight-bold"><a href = "{% url 'index' %}">ES Maker</a></h1>
+                        <h1 class="level-item has-text-weight-bold"><a href = "{% url 'index' %}">ESupporter</a></h1>
                     </div>
                 </nav>
             </div>
@@ -63,7 +63,7 @@
         <br></br>
         という悩みはありませんか?<br>
 
-        ES Makerでは、そんな悩みを解決する2つの機能があります!
+        ESupporterでは、そんな悩みを解決する2つの機能があります!
     </div>
 
     <div class="column">
@@ -94,17 +94,21 @@
     <br><br><br>
 </div>
 
-
+<div class="block">
+    <h2 class="subtitle">AI要約機能を体験してみよう!</h2>
+</div>
 
 <div class="block">
-    <h2 class="subtitle">サンプル文章</h2>
+    <h2 class="subtitle">サンプル</h2>
 </div>
 <div class="block">
-    <h3>タイトル</h3>
-    <p>スーツケースを格安で購入するポイント</p>
+    <h3>内容</h3>
 </div>
 <div class="block">
-    <p> {{text}} </p>
+    {% for t in text %}
+        <p> {{ t }} </p>
+    {% endfor %}
+    <p> (文字数 : {{ sample_text_length }} 文字) </p>
 </div>
 
 <div class="block">
@@ -124,7 +128,14 @@
 
 </form>
 
+<br></br>
+
 {% if summarized_answer %}
+
+<div class="block">
+    <h2 class="subtitle"> 要約結果 </h2>
+</div>
+
 <div class="block">
     <div class="box">
     <p>{{ summarized_answer }}</p>
@@ -132,7 +143,7 @@
 </div>
 
 <div class="block">
-    <h3 class="subtitle">{{ summarized_answer_length }}文字</h3>
+    <h3 class="subtitle">要約後: {{ summarized_answer_length }}文字</h3>
 </div>
 
 {% endif %}

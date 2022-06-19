@@ -17,22 +17,29 @@
     <br></br>
     
  
-
-    <div class="block">
-        <h1 class="title"><strong>AI要約機能</strong></h1>
-    </div>
-    <div class="block">
-        <h2 class="subtitle"><strong>要約したい質問をクリックして下さい。</strong></h2>
-    </div>
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="block">
-            <input name="SearchBox" type="text" placeholder="キーワードを入力"></input>
-            <button type="submit"class=submit>検索</button>  
+    <div class ="block">
+        <div class="has-text-centered">
+            <h1 class="title"><strong>AI要約機能</strong></h1>
+            <h2 class="subtitle"><strong>要約したい質問をクリックして下さい。</strong></h2>
         </div>
-    </form>
-    <br><br>
-    
+        
+        <div class="has-text-right">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="field has-addons">
+                    <div class="control">
+                        <input class="input" name="SearchBox" type="text" placeholder="キーワードを入力"></input>
+                    </div>
+                    <div class="control">
+                        <button type="submit"class="button is-info"></i>検索</button>  
+                    </div>
+                </div>
+            </form> 
+        </div>
+
+    </div>    
+
+
     <div class="block">
         {% for question in questions %}
             <a href="{% url 'answer' pk=user.id ans=question.id %}" class = "box is-white">{{question.question}}</a>
@@ -41,14 +48,10 @@
 
     <div class="block">
         <a href="{% url 'post_answer' pk=user.id %}" class="button is-primary">質問と回答を追加</a>
+        <a href="{% url 'mypage' pk=user.id %}" class="button is-primary">マイページへ戻る</a>
     </div>
     
-    <br></br>
-
-    <div class="block is-size5">
-        <a href="{% url 'mypage' pk=user.id %}" class="tag">マイページへ戻る</a>
-    </div>
-
+    <br>
 </div>
 
     

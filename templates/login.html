@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>ESMaker</title>
+    <title>ESupporter</title>
 
 </head>
 
@@ -16,7 +16,7 @@
                 <nav class = "level is-size-3">
                 
                     <div class = "level-left">
-                        <h1 class="level-item has-text-weight-bold"><a href = "{% url 'index' %}">ES Maker</a></h1>
+                        <h1 class="level-item has-text-weight-bold"><a href = "{% url 'index' %}">ESupporter</a></h1>
                     </div>
  
                 </nav>
@@ -26,7 +26,6 @@
 
 <div class="container">
     <br><br>
-<h1 class="title has-text-centered">ログイン</h1>
 {% if error %}
 
 <div class="block">
@@ -56,6 +55,8 @@
     <br></br>
 
     <button type="submit" class="button is-primary">ログイン</button>
+    <a href="{% url 'index'%}" class="button is-primary">戻る</a>
+    
 </form>
 
 
